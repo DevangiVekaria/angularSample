@@ -1,0 +1,26 @@
+<div class="container">
+  <form [formGroup]="angForm" novalidate >
+    <div class="form-group">
+      <label>Public Url:</label>
+      <input class="form-control" formControlName="public_url" type="text" value="http://0.0.0.0:51235">
+    </div>
+    <div *ngIf="angForm.controls['public_url'].invalid && (angForm.controls['public_url'].dirty || angForm.controls['public_url'].touched)" class="alert alert-danger">
+      <div *ngIf="angForm.controls['public_url'].errors.required">
+        Public Url is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Private Url:</label>
+      <input class="form-control" formControlName="private_url" type="text" value="http://localhost:51234">
+    </div>
+    <div *ngIf="angForm.controls['private_url'].invalid && (angForm.controls['private_url'].dirty || angForm.controls['private_url'].touched)" class="alert alert-danger">
+      <div *ngIf="angForm.controls['private_url'].errors.required">
+        Private Url is required.
+      </div>
+    </div>
+    <button class="btn btn-default" [disabled]="angForm.pristine || angForm.invalid"  (click)="checkApiUrl()">Submit</button>
+    <div *ngIf="invalidURL" class="error">
+      <div>Invalid Public / Private Url.</div>
+    </div>
+  </form>
+</div>

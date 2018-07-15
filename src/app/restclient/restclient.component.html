@@ -1,0 +1,23 @@
+<div class="container">
+  <form [formGroup]="restClientForm" novalidate>
+    <div class="form-group">
+      <label>Select Endpoint</label>
+
+      <select class="form-control" formControlName="endpoints" id="endpoints" (change)="onChange($event.target.value)">
+        <option value="" disabled selected>Select Endpoint</option>
+        <option *ngFor="let item of restclients" [value]="item.id">{{item.url}}-{{item.urlType}}</option>
+      </select>
+    </div>
+
+    <div *ngFor="let param of urlParams">
+      <div class="col-md-3">{{param.key}}</div>
+      <div class="col-md-3">
+        <input type="text" [ngModelOptions]="{ standalone: true }" [(ngModel)]="param.value" />
+      </div>
+    </div>
+    <button class="btn btn-default" (click)="callApi()">Submit</button>
+    <div *ngIf="errorMessage != ''">
+      {{errorMessage}}
+    </div>
+  </form>
+</div>
